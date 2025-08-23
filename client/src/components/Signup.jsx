@@ -18,6 +18,8 @@ import { useDispatch } from "react-redux";
 import { userExist } from "../redux/reducers/auth";
 import useIsMobile from "../shared/useIsMobile";
 
+const API_URL = "https://chillzone-tif5.onrender.com";
+
 const Signup = () => {
   const isMobile = useIsMobile();
   const [formData, setFormData] = useState({
@@ -42,7 +44,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/signup",
+        `${API_URL}/user/signup`,
         formData,
         { withCredentials: true }
       );

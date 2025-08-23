@@ -13,6 +13,8 @@ import { motion } from "framer-motion";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = "https://chillzone-tif5.onrender.com";
+
 const JoinRoom = () => {
   const [groupName, setGroupName] = useState("");
   const [passkey, setPassKey] = useState("");
@@ -33,7 +35,7 @@ const JoinRoom = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/joinGroup",
+        `${API_URL}/user/joinGroup`,
         data,
         config
       );

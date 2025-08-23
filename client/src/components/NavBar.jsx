@@ -7,6 +7,8 @@ import { userNotExists } from "../redux/reducers/auth";
 import useIsMobile from "../shared/useIsMobile";
 import MenuIcon from "@mui/icons-material/Menu";
 
+
+const API_URL = "https://chillzone-tif5.onrender.com";
 function NavBar() {
   const isMobile = useIsMobile();
   const navigate = useNavigate();
@@ -34,7 +36,7 @@ function NavBar() {
   };
   const handleLogOut = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/user/logOut", {
+      const response = await axios.get(`${API_URL}/user/logOut`, {
         withCredentials: true,
       });
       console.log(response?.data?.message);

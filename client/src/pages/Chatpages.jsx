@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
+const API_URL = "https://chillzone-tif5.onrender.com";
+
 const MyComponent = ({ group }) => {
     const [chats, setChats] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ const MyComponent = ({ group }) => {
                 headers: { "Content-Type": "application/json" },
             };
             try {
-                const response = await axios.get("http://localhost:3000/user/getMyChats", config);
+                const response = await axios.get(`${API_URL}/user/getMyChats`, config);
                 setChats(response.data.transformedChats || []);
             } catch (err) {
                 setError("Failed to fetch chats. Please try again later.");

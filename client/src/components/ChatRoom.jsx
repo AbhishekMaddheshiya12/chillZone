@@ -9,7 +9,7 @@ import MessageComponent from "./MessageComponent";
 import { AttachFile as AttachFileIcon, Attachment } from "@mui/icons-material";
 import RenderAttachments from "../shared/RenderAttachment";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://chillzone-tif5.onrender.com";
 
 const ChatRoom = ({ chatId,user }) => {
   const room = chatId;
@@ -156,7 +156,7 @@ const ChatRoom = ({ chatId,user }) => {
       formData.append("chatId", room);
       formData.append("files", atttachMent);
       setLoading(true);
-      const response = await axios.post("http://localhost:3000/user/sendfiles", formData, { withCredentials: true });
+      const response = await axios.post(`${API_URL}/user/sendfiles`, formData, { withCredentials: true });
        setAttachment(null);
       setLoading(false);
       console.log(response);

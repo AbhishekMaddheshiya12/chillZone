@@ -12,6 +12,8 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = "https://chillzone-tif5.onrender.com";
+
 function EditProfile() {
     const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -43,7 +45,7 @@ function EditProfile() {
     };
     try {
       const result = await axios.post(
-        "http://localhost:3000/user/update-profile",
+        `${API_URL}/user/update-profile`,
         formData,
         config
       );

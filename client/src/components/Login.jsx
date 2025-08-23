@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 import{ Grid2 as Grid} from "@mui/material"; 
 import { useDispatch } from "react-redux";
 
+
+const API_URL = "https://chillzone-tif5.onrender.com";
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
@@ -27,7 +29,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/login",
+        `${API_URL}/user/login`,
         formData,
         { withCredentials: true }
       );

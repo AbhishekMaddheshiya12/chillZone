@@ -2,6 +2,7 @@ import { Avatar, Box, Icon, Paper, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
+const API_URL = "https://chillzone-tif5.onrender.com";
 function Users({chatId}) {
     const [users,setUsers] = useState([]);
 
@@ -12,7 +13,7 @@ function Users({chatId}) {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
           };
-          const response = await axios.get(`http://localhost:3000/user/getmembers/${chatId}`,config)
+          const response = await axios.get(`${API_URL}/user/getmembers/${chatId}`,config)
           console.log(response?.data?.members);
           if(response?.data?.success){
             setUsers(response?.data?.members)

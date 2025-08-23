@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { InputBox } from "../styledComponent/styld";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = "https://chillzone-tif5.onrender.com";
+
 const CreateRoom = () => {
   const navigate = useNavigate();
   const [groupName, setGroupName] = useState("");
@@ -26,7 +28,7 @@ const CreateRoom = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/user/createGroup",
+        `${API_URL}/user/createGroup`,
         data,
         config
       );

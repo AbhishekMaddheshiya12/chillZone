@@ -18,6 +18,8 @@ import ProtectedComponent from "./protected/ProtectedComponent";
 import Loader from "./protected/Loader";
 import EditProfile from "./pages/EditProfile";
 
+const API_URL = "https://chillzone-tif5.onrender.com";
+
 const App = () => {
   const [authChecked, setAuthChecked] = useState(false);
   const { user } = useSelector((state) => state.auth);
@@ -30,7 +32,7 @@ const App = () => {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         };
-        const data = await axios.get("http://localhost:3000/user/me", config);
+        const data = await axios.get(`${API_URL}/user/me`,config);
         // console.log(data);
         dispatch(userExist(data.data.details));
       } catch (error) {

@@ -10,6 +10,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import useIsMobile from "../shared/useIsMobile";
 
+const API_URL = "https://chillzone-tif5.onrender.com";
+
 function Rooms() {
   const { user } = useSelector((state) => state.auth);
   const isMobile = useIsMobile();
@@ -23,7 +25,7 @@ function Rooms() {
           headers: { "Content-Type": "application/json" },
         };
         const response = await axios.get(
-          "http://localhost:3000/user/getMyChats",
+          `${API_URL}/user/getMyChats`,
           config
         );
         // console.log(response?.data?.transformedChats);
