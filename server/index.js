@@ -37,7 +37,7 @@ cloudinary.config({
 app.use(express.json()); // middleware to parse JSON data sent in the request body
 app.use(cookieParser()); // middleware to parse cookies sent in the request header
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "chill-zone-alpha.vercel.app",
   credentials: true,
 }));
 
