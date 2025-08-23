@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Message } from "./models/Message.js";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from 'dotenv';
+import User from "./models/User.js";
 // import { Message } from "./models/Message.js";
 
 const app = express(); // create the instance of the express server
@@ -82,16 +83,14 @@ io.on("connection", (socket) => {
     const messageForRealTime = {
       content: message,
       _id: uuidv4(),
-      sender: {
-        _id: user._id,
-      },
+      sender: await User.findById(user._id).lean().select("name"),
       chat: chatId,
       createdAt: new Date(),
     };
 
     const messageForDB = {
       content: message,
-      sender: user._id,
+      sender: await User.findById(user._id).lean().select("name"),
       chat: chatId,
       createdAt: new Date(),
     }
