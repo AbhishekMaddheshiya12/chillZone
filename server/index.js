@@ -16,7 +16,7 @@ const app = express(); // create the instance of the express server
 const server = createServer(app); // This creates an HTTP server using the Express app
 dotenv.config();
 const corsOption = {
-  origin: "http://localhost:5173",
+  origin: "https://chill-zone-alpha.vercel.app/",
   credentials: true,
 };
 
