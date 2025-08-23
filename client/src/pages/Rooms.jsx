@@ -4,7 +4,7 @@ import Profile from "../user/Profile";
 import NavBar from "../components/NavBar";
 import image1 from "../assets/678a4aae3ee9f2e87506de82_Clyde (1).webp";
 import { motion } from "framer-motion";
-import CreateRoom from "./createRoom";
+import CreateRoom from "./CreateRoom.jsx";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
