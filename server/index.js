@@ -15,12 +15,23 @@ import dotenv from 'dotenv';
 const app = express(); // create the instance of the express server
 const server = createServer(app); // This creates an HTTP server using the Express app
 dotenv.config();
-const corsOption = {
-  origin: "https://chill-zone-alpha.vercel.app",
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://chill-zone-alpha.vercel.app"
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
 };
 
-const io = new Server(server, { cors: corsOption });
+const io = new Server(server, { cors: corsOptions });
 
 app.set("io", io); // store the instance of socket.io in the app object
 
@@ -36,10 +47,7 @@ cloudinary.config({
 
 app.use(express.json()); // middleware to parse JSON data sent in the request body
 app.use(cookieParser()); // middleware to parse cookies sent in the request header
-app.use(cors({
-  origin: "chill-zone-alpha.vercel.app",
-  credentials: true,
-}));
+app.use(cors(corsOptions));
 
 app.use("/user", userRouter); // route the request to the userRouter
 
