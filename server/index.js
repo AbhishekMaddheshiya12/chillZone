@@ -16,7 +16,7 @@ const app = express(); // create the instance of the express server
 const server = createServer(app); // This creates an HTTP server using the Express app
 dotenv.config();
 const allowedOrigins = [
-  "http://localhost:3000",
+  "http://localhost:5173",
   "https://chill-zone-alpha.vercel.app"
 ];
 
