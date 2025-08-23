@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./components/Signup";
-import ChatRoom from "./components/ChatRoom";
-import CreateRoom from "./pages/createRoom";
+import ChatRoom from "./components/ChatRoom.jsx";
+import CreateRoom from "./pages/CreateRoom.jsx";
 import JoinRoom from "./pages/JoinRoom";
 import Chatpages from "./pages/Chatpages";
 import Login from "./components/Login";
