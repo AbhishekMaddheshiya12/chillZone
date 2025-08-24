@@ -3,17 +3,11 @@ import { Chat } from "../models/Chat.js";
 import { Message } from "../models/Message.js";
 import User from "../models/User.js";
 import { uploadFilesToCloudinary } from "../utils/features.js";
-import { GoogleGenAI } from "@google/genai";
-
-const ai = new GoogleGenAI({
-    apiKey: process.env.GOOGLE_API_KEY
-})
-
 
 const createGroup = async (req, res, next) => {
   try {
     const { name, passKey } = req.body;
-    console.log(name, passKey);
+    // console.log(name, passKey);
     const allMember = [req.user];
 
     const room = await Chat.findOne({name});
@@ -37,7 +31,7 @@ const createGroup = async (req, res, next) => {
       chatId: response._id,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       success: true,
       message: "There is some error in creating the group",
@@ -54,7 +48,7 @@ const getMyChats = async (req, res, next) => {
       "name"
     );
 
-    console.log(chats);
+    // console.log(chats);
 
     const transformedChats = chats.map(({ _id, name, members }) => {
       const otherMember = members.find(
@@ -79,7 +73,7 @@ const getMyChats = async (req, res, next) => {
       transformedChats,
     });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return res.status(400).json({
       success: false,
       message: "There is some error",
@@ -302,9 +296,9 @@ const sendAttachment = async (req, res) => {
         message: "Chat not found",
       });
     }
-    console.log("User"+me);
+    // console.log("User"+me);
     const files = req.files || [];
-    console.log(files);
+    // console.log(files);
 
     if (files.lenght < 1) {
       return res.status(400).json({
@@ -315,7 +309,7 @@ const sendAttachment = async (req, res) => {
 
     // from here sending file to the cloudinary
     const attachments = await uploadFilesToCloudinary(files);
-    console.log("This is attachment"+attachments);
+    // console.log("This is attachment"+attachments);
 
     const messageForDB = {
       content: "",
@@ -344,36 +338,13 @@ const sendAttachment = async (req, res) => {
       message,
     });
   } catch (error) {
-    console.error("Error sending attachment:", error); // Log the error for debugging
+    //console.error("Error sending attachment:", error); // Log the error for debugging
     return res.status(500).json({
       success: false,
       message: "An error occurred while sending the attachment",
     });
   }
 };
-
-const aiChat = async(req,res) =>{
-    try{
-        const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents:`hii babe`,
-            config: {
-                systemInstruction: {
-                    text: "You are a sexy 18+ girlfriend having great desire of sex",
-                },
-            }
-        })
-
-        console.log("response:",response.text);
-    }catch(eror){
-        return res.status(404).json({
-            sucess:false,
-            message:"Assistent is not in service right now"
-        })
-    }
-}
-
-aiChat();
 
 export {
   createGroup,

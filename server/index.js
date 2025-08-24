@@ -10,7 +10,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { Message } from "./models/Message.js";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from 'dotenv';
-import User from "./models/User.js";
 // import { Message } from "./models/Message.js";
 
 const app = express(); // create the instance of the express server
@@ -74,28 +73,32 @@ io.on("connection", (socket) => {
     return socket.disconnect(true);
   }
 
-  console.log("A user is connected:", socket.id, "User ID:", user._id);
+  // console.log("A user is connected:", socket.id, "User ID:", user._id);
   userSocketIDs.set(user._id.toString(), socket.id);
 
-  console.log("UserSocketIDs Map:", Array.from(userSocketIDs.entries()));
+  // console.log("UserSocketIDs Map:", Array.from(userSocketIDs.entries()));
 
   socket.on("NEW_MESSAGE", async ({ chatId, members, message }) => {
     const messageForRealTime = {
       content: message,
       _id: uuidv4(),
-      sender: await User.findById(user._id).lean().select("name"),
+      sender:{
+        _id: user._id
+      },
+      senderName: user.username,
       chat: chatId,
       createdAt: new Date(),
     };
 
     const messageForDB = {
       content: message,
-      sender: await User.findById(user._id).lean().select("name"),
+      sender: user._id,
+      senderName: user.username,
       chat: chatId,
       createdAt: new Date(),
     }
-    console.log("Members:", members);
-    console.log("UserSocketIDs Keys:", Array.from(userSocketIDs.keys()));
+    // console.log("Members:", members);
+    // console.log("UserSocketIDs Keys:", Array.from(userSocketIDs.keys()));
 
     const membersSockets = getSockets(members);
 

@@ -3,6 +3,7 @@ import authMiddleware from "../middleware/auth.js";
 import { aboutMe, login, logOut, signUp, updateProfile } from "../controllers/user.js";
 import { createGroup, getChatDetails, getMembers, getMessages, getMyChats, groupByMe, joinGroup, sendAttachment } from "../controllers/chat.js";
 import { multerUpload } from "../middleware/multer.js";
+import { aiChat } from "../controllers/aiChat.js";
 const router = express.Router();
 
 router.post("/signup",signUp);
@@ -18,6 +19,7 @@ router.post("/sendfiles",multerUpload.array("files",5),authMiddleware,sendAttach
 router.get("/getMessages/:chatId",getMessages)
 router.post('/update-profile', multerUpload.single("avatar"),authMiddleware, updateProfile);
 router.get('/logOut',authMiddleware,logOut);
+router.post('/aiChat',authMiddleware,aiChat);
 
 
 export default router;

@@ -50,7 +50,7 @@ const signUp = async (req, res) => {
         user
       });
   } catch (error) {
-    console.error("SignUp Error:", error);
+    // console.error("SignUp Error:", error);
     return res.status(500).json({
       success: false,
       message: "User not created",
@@ -69,21 +69,20 @@ const login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return res.status(400).json({
         success: false,
         message: "User not found",
       });
     }
-
     const isMatched = await bcrypt.compare(password, user.password);
     if (!isMatched) {
       return res.status(400).json({
         success: false,
         message: "Password does not match",
       });
-    }
+    };
 
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN || "1d",
@@ -100,13 +99,19 @@ const login = async (req, res) => {
       .json({
         success: true,
         message: "User logged in successfully",
-        user
+        user:{
+          _id:user._id,
+          username:user.username,
+          email:user.email,
+          createdAt:user.createdAt,
+          updatedAt:user.updatedAt
+        }
       });
   } catch (error) {
-    console.error("Login Error:", error);
+    // console.error("Login Error:", error);
     return res.status(500).json({
       success: false,
-      message: "User not logged in",
+      message: "Failed to Login",
     });
   }
 };
@@ -114,7 +119,7 @@ const login = async (req, res) => {
 const aboutMe = async (req, res) => {
   try {
     const userId = req.user;
-    console.log(userId);
+    // console.log(userId);
     if (!userId) {
       return res.status(400).json({
         success: false,
@@ -142,7 +147,7 @@ const updateProfile = async (req, res) => {
     const { name, email } = req.body;
     const avatar = req.file;
 
-    console.log(name, email, avatar);
+    // console.log(name, email, avatar);
 
     if (!name && !email && !avatar) {
       return res.status(400).json({
@@ -155,7 +160,7 @@ const updateProfile = async (req, res) => {
     const user = await User.findById(userId);
     const result = await uploadFilesToCloudinary(files);
 
-    console.log(result);
+    // console.log(result);
 
     if (name) user.name = name;
     if (email) user.email = email;
@@ -171,7 +176,7 @@ const updateProfile = async (req, res) => {
       message: "Profile updataed Successfully",
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(400).json({
       success: false,
       message: "There is some error in updating data",
