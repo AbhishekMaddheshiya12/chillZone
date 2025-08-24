@@ -7,6 +7,7 @@ import NavBar from "./NavBar";
 import { motion } from "framer-motion";
 import{ Grid2 as Grid} from "@mui/material"; 
 import { useDispatch } from "react-redux";
+import { userExist } from "../redux/reducers/auth";
 
 
 const API_URL = "https://chillzone-tif5.onrender.com";
@@ -34,6 +35,7 @@ const Login = () => {
         { withCredentials: true }
       );
       alert("Login successful!");
+      dispatch(userExist(response?.data?.user))
       navigate("/home");
     } catch (error) {
       console.error("Login error:", error.response?.data || error.message);

@@ -541,40 +541,7 @@ const Signup = () => {
                 },
               }}
             >
-              <Typography variant="body2" sx={{ color: "#94a3b8", px: 2 }}>
-                or sign up with
-              </Typography>
             </Divider>
-
-            <Box
-              sx={{
-                display: "flex",
-                gap: 2,
-                justifyContent: "center",
-                mb: 3,
-              }}
-            >
-              {["Google", "Apple", "Facebook"].map((provider) => (
-                <Button
-                  key={provider}
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "12px",
-                    py: 1.5,
-                    px: 3,
-                    borderColor: "#e2e8f0",
-                    color: "#334155",
-                    fontWeight: 600,
-                    "&:hover": {
-                      borderColor: "#cbd5e0",
-                      background: "#f8fafc",
-                    },
-                  }}
-                >
-                  {provider}
-                </Button>
-              ))}
-            </Box>
 
             <Typography
               variant="body2"

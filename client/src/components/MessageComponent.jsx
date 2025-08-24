@@ -5,36 +5,51 @@ import { Box } from "@mui/material";
 import RenderAttachments from "../shared/RenderAttachment";
 
 function MessageComponent({ message, user }) {
-  const { sender, content, attachment = [], createdAt } = message;
-  const sameSender = sender._id === user;
+  const { sender, content, attachment = [], createdAt,senderName } = message;
+  // console.log(sender)
+  
+
+  const sameSender = sender._id.toString() === user;
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+  
   return (
-    <div
-      style={{
-        alignSelf: sameSender ? "flex-end" : "flex-start",
-      }}
-    >
-      {!sameSender && (
-        <Typography fontWeight={600} variant="caption">
-          {sender._id}
-        </Typography>
-      )}
-      {content && <Typography>{content}</Typography>}
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          alignSelf: sameSender ? "flex-end" : "flex-start", 
+          backgroundColor: sameSender ? "lightblue" : "lightgray",
+          padding: "10px",
+          borderRadius: "10px",
+          maxWidth: "40%",
+          marginTop: "5px",
+        }}
+      >
+        {!sameSender && (
+          <Typography fontWeight={600} variant="caption">
+            {senderName}
+          </Typography>
+        )}
+        {content && <Typography>{content}</Typography>}
 
-      {attachment.length > 0 &&
-        attachment.map((attach, index) => {
-          const url = attach.url;
-          const file = fileFormet(url);
+        {attachment.length > 0 &&
+          attachment.map((attach, index) => {
+            const url = attach.url;
+            const file = fileFormet(url);
 
-          return (
-            <Box key={index}>
+            return (
+              <Box key={index}>
                 <RenderAttachments file={file} url={url} />
-            </Box>
-          );
-        })}
-      <div style={{ fontSize: "0.8em", color: "gray" }}>
-        {new Date(message.createdAt).toLocaleTimeString()}
+              </Box>
+            );
+          })}
+        <div style={{ fontSize: "0.8em", color: "gray" }}>
+          {new Date(createdAt).toLocaleTimeString()}
+        </div>
       </div>
-    </div>
+    </Box>
   );
 }
 

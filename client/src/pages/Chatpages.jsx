@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
-const API_URL = "https://chillzone-tif5.onrender.com";
+const API_URL ="https://chillzone-tif5.onrender.com";
 
 const MyComponent = ({ group }) => {
     const [chats, setChats] = useState([]);

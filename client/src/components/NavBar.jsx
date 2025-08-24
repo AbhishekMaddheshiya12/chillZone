@@ -42,6 +42,7 @@ function NavBar() {
       console.log(response?.data?.message);
       if (response?.data?.success) {
         dispath(userNotExists());
+        localStorage.clear();
         navigate("/");
       }
     } catch (error) {
@@ -118,6 +119,12 @@ function NavBar() {
             </ListItem>
             <Divider />
             <ListItem disablePadding>
+              <ListItemButton onClick={()=>navigate("/ai")}>
+                <ListItemText primary="Talk to" />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+            <ListItem disablePadding>
               <ListItemButton onClick={handleLogOut}>
                 <ListItemText primary="Logout" />
               </ListItemButton>
@@ -152,6 +159,13 @@ function NavBar() {
           >
             Join Room
           </Button>
+          <Button
+            sx={{ textTransform: "none", color: "black", fontWeight: "bold" }}
+            onClick={() => navigate("/ai")}
+          >
+            Chat with AI
+          </Button>
+          
           <Button
             variant="contained"
             color="#6C60CF"

@@ -14,7 +14,7 @@ function Users({chatId}) {
             headers: { "Content-Type": "application/json" },
           };
           const response = await axios.get(`${API_URL}/user/getmembers/${chatId}`,config)
-          console.log(response?.data?.members);
+          // console.log(response?.data?.members);
           if(response?.data?.success){
             setUsers(response?.data?.members)
           }

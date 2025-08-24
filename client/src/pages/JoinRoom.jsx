@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import NavBar from "../components/NavBar";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "https://chillzone-tif5.onrender.com";
+const API_URL ="https://chillzone-tif5.onrender.com";
 
 const JoinRoom = () => {
   const [groupName, setGroupName] = useState("");

@@ -9,7 +9,7 @@ import MessageComponent from "./MessageComponent";
 import { AttachFile as AttachFileIcon, Attachment } from "@mui/icons-material";
 import RenderAttachments from "../shared/RenderAttachment";
 
-const API_URL = "https://chillzone-tif5.onrender.com";
+const API_URL =  "https://chillzone-tif5.onrender.com";
 
 const ChatRoom = ({ chatId,user }) => {
   const room = chatId;

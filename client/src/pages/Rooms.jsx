@@ -1,4 +1,4 @@
-import { Avatar, Box, Grid2, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Button, Grid2, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Profile from "../user/Profile";
 import NavBar from "../components/NavBar";
@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import CreateRoom from "./CreateRoom.jsx";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useIsMobile from "../shared/useIsMobile";
 
 const API_URL = "https://chillzone-tif5.onrender.com";
@@ -15,6 +15,7 @@ const API_URL = "https://chillzone-tif5.onrender.com";
 function Rooms() {
   const { user } = useSelector((state) => state.auth);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   // console.log(user);
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
@@ -111,6 +112,9 @@ function Rooms() {
                 }}
               >
                 <img src={image1}></img>
+                <Button sx={{fontSize:"20px",fontWeight:"bold",color:"Gray",ml:3}} onClick={() => navigate("/ai")}>
+                  Let's Share,Share with Me
+                </Button>
               </motion.div>
             </Box>
           </Grid2>

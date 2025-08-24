@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 function Profile() {
   const {user} = useSelector((state) => state.auth);
-  console.log(user);
+  // console.log(user);
 
   return (
     <Box sx={{ maxWidth: 600, margin: "auto", p: 3 }}>

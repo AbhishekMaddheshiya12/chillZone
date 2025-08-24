@@ -1,5 +1,5 @@
 import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-const API_URL = "https://chillzone-tif5.onrender.com";
+const API_URL = "http://localhost:3000"//"https://chillzone-tif5.onrender.com";
 
 const api = createApi({
     reducerPath:'api',
